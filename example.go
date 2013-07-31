@@ -3,7 +3,7 @@ import (
 "fmt"
 )
 
-func main() {
+func main2() {
   var str string
   // 赋值
   str = "123"
