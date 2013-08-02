@@ -11,13 +11,13 @@ import (
 
 // 判断是什么环境
 func IsWindows() bool {
-  return os.DevNull == "NULL"
+  return os.DevNull == "NUL"
 }
 
 // 找到执行浏览器的命令
 func BrowserCmd() string {
   if IsWindows() {
-    return "start"
+    return "explorer"
   } else {
     return "open"
   }
@@ -25,7 +25,7 @@ func BrowserCmd() string {
 
 // 打开浏览器
 func Browser() {
-  cmd := exec.Command(BrowserCmd(), "http://0.0.0.0:8081")
+  cmd := exec.Command(BrowserCmd(), "http://localhost:8081")
   err := cmd.Start()
   if err != nil {
     fmt.Println(err)
@@ -74,10 +74,13 @@ func UpdateLocalHosts(filename string) {
 
 func AfterUpdate() []byte {
   if IsWindows() {
-    cmd := exec.Command("ipconfig /flushdns")
-    cmd.Run()
-    output, _ := cmd.Output()
-    return output
+    cmd := exec.Command("ipconfig", "/flushdns")
+    output, err := cmd.Output()
+    if err != nil {
+        return []byte(err.Error())
+    } else {
+        return output
+    }
   } else {
     return []byte("hosts update successful.")
   }

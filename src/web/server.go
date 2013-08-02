@@ -24,11 +24,11 @@ func StartServer(ch chan bool) {
 }
 
 func homePage(w http.ResponseWriter, req *http.Request) {
-  io.WriteString(w, "<html>" + closeLink() + "<br><a href='http://0.0.0.0:8081/update'>更新 Hosts 文件</a></html>")
+  io.WriteString(w, "<html>" + closeLink() + "<br><a href='http://localhost:8081/update'>更新 Hosts 文件</a></html>")
 }
 
 func closeLink() string {
-  return "<a href='http://0.0.0.0:8081/exit'>退出</a>"
+  return "<a href='http://localhost:8081/exit'>退出</a>"
 }
 
 func updateHosts(w http.ResponseWriter, req *http.Request) {
