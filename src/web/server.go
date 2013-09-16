@@ -23,8 +23,13 @@ func StartServer(ch chan bool) {
 	}
 }
 
+func header() string {
+	return "<head><meta http-equiv='content-type' content='text/html;charset=utf-8'></head>"
+}
+
 func homePage(w http.ResponseWriter, req *http.Request) {
-	io.WriteString(w, "<html>"+closeLink()+"<br><a href='http://localhost:8081/update'>更新 Hosts 文件</a></html>")
+	io.WriteString(w, "<html>" + header() + "<body>" + closeLink() + 
+		"<br><a href='http://localhost:8081/update'>更新 Hosts 文件</a></body></html>")
 }
 
 func closeLink() string {
@@ -38,7 +43,9 @@ func updateHosts(w http.ResponseWriter, req *http.Request) {
 	hosts, _ := host.Hosts()
 	cmdOutput := host.AfterUpdate()
 
-	io.WriteString(w, "<html>"+closeLink()+"<h3>运行结果:"+string(cmdOutput)+"</h3><br><hr><br>"+strings.Join(strings.Split(string(hosts), "\n"), "<br>")+"</html>")
+	io.WriteString(w, "<html>" + header() + "<body>" + closeLink() + 
+		"<h3>运行结果:" + string(cmdOutput) + "</h3><br><hr><br>" + 
+		strings.Join(strings.Split(string(hosts), "\n"), "<br>") + "</body></html>")
 }
 
 func stopServer(w http.ResponseWriter, req *http.Request) {

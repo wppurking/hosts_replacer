@@ -1,5 +1,9 @@
 package host
 
+import (
+ "os/exec"
+)
+
 // 找到 hosts 文件路径
 func LocalHostsPath() string {
 	return "c:/windows/system32/drivers/etc/hosts"
