@@ -15,6 +15,7 @@ func Browser() {
 		log.Println(err)
 	}
 
+	log.Println("host_replacer version: 1.1")
 	log.Println("Open url:", "http://localhost:8081", "in browser to start.")
 }
 
